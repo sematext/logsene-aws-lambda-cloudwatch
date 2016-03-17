@@ -1,0 +1,15 @@
+{
+  "name": "logsene-cloudwatch-lambda",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "author": "Sematext",
+  "dependencies": {
+    "logagent-js": "^1.1.22"
+  },
+  "scripts": {
+    "start": "node server.js"
+  },
+  "devDependencies": {},
+  "license": "ISC"
+}
