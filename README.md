@@ -20,7 +20,7 @@ Then you'll need to set up a IAM role that's able to push VPC logs to your Cloud
 ![flowlog](https://raw.githubusercontent.com/sematext/logsene-aws-lambda-cloudwatch/master/img/flowlog.png)
 
 ###Create a new AWS Lambda function
-Now go to Service -> Lambda and get started with a new function. Then the first step is to select a blueprint for your function. Take **cloudwatch-logs-process-data**:
+Now go to Services -> Lambda and get started with a new function. Then the first step is to select a blueprint for your function. Take **cloudwatch-logs-process-data**:
 ![blueprint](https://raw.githubusercontent.com/sematext/logsene-aws-lambda-cloudwatch/master/img/blueprint.png)
 
 The next step is to select a source. Here you'd make sure the source type is CloudWatch Logs and select the flow you just created. You can filter only certain logs, but you'd normally leave the **Filter Pattern** empty to process all of them. Nevertheless, you need to give this filter a name:
