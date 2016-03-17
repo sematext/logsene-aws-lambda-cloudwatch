@@ -20,7 +20,7 @@ Then you'll need to set up a IAM role that's able to push VPC logs to your Cloud
 ![flowlog](https://raw.githubusercontent.com/sematext/logsene-aws-lambda-cloudwatch/master/img/flowlog.png)
 
 ###Create a new AWS Lambda function
-Now o to Service -> Lambda and get started with a new function. Then the first step is to select a blueprint for your function. Take **cloudwatch-logs-process-data**:
+Now go to Service -> Lambda and get started with a new function. Then the first step is to select a blueprint for your function. Take **cloudwatch-logs-process-data**:
 ![blueprint](https://raw.githubusercontent.com/sematext/logsene-aws-lambda-cloudwatch/master/img/blueprint.png)
 
 The next step is to select a source. Here you'd make sure the source type is CloudWatch Logs and select the flow you just created. You can filter only certain logs, but you'd normally leave the **Filter Pattern** empty to process all of them. Nevertheless, you need to give this filter a name:
@@ -29,7 +29,7 @@ The next step is to select a source. Here you'd make sure the source type is Clo
 At the next step, you'd configure the function itself. First you give it a name:
 ![name](https://raw.githubusercontent.com/sematext/logsene-aws-lambda-cloudwatch/master/img/name.png)
 
-Then you have to specify the code. Which is when you'd need to clone this repository.
+Then you have to specify the code.
 
 ###Add the code to your Lambda function
 First you'd need to clone this repository:
@@ -39,7 +39,7 @@ First you'd need to clone this repository:
 Then, open **index.js** and fill in your Logsene application token in the **logseneToken** variable. To find the Logsene Application Token, go to your [Sematext Account](https://apps.sematext.com), then in the Services menu select Logsene, and then the Logsene application you want to send your logs to. Once you're in that application, click the Integration button and you'll see the application token:
 ![token](https://raw.githubusercontent.com/sematext/logsene-aws-lambda-cloudwatch/master/img/token.png)
 
-Now your code is ready, so you need to make a zip file out of it. **Note**: make sure you zip only the contents of the repository, not the directory containing the repository. Like:
+Now your code is ready, so you need to make a zip file out of it. **Note**: make sure you zip only the contents of the repository, not the directory containing the repository. The correct way to do it is something like this:
 
     pwd
     # /tmp/cloned-repos/logsene-aws-lambda-cloudwatch
