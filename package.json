@@ -5,7 +5,7 @@
   "main": "server.js",
   "author": "Sematext",
   "dependencies": {
-    "logagent-js": "^1.1.22"
+    "logagent-js": "^1.1.31"
   },
   "scripts": {
     "start": "node server.js"
