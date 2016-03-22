@@ -52,7 +52,7 @@ Finally, you'd upload the zip to AWS Lambda as the function code:
 After the code, leave the handler to the default *index.handler* and select a role that allows this function to execute. You can create a new Basic execution role to do that (from the drop-down) or select a basic execution role that you've already created:
 ![role](https://raw.githubusercontent.com/sematext/logsene-aws-lambda-cloudwatch/master/img/role.png)
 
-Then, you need to decide on how much memory you allow for the function and how long you allow it to run. This depends on the log throughput (more logs will need more processing resources) and will influence costs (i.e. like keeping the equivalent general-purpose instance up for that time). Normally, runtime is very short (sub-second) so even large resources shouldn't generate significant costs. The default 128MB and 3 second timeout should be enough for most use-cases:
+Then, you need to decide on how much memory you allow for the function and how long you allow it to run. This depends on the log throughput (more logs will need more processing resources) and will influence costs (i.e. like keeping the equivalent general-purpose instance up for that time). Normally, runtime is very short so even large resources shouldn't generate significant costs. 256MB and 30 second timeout should be enough for most use-cases:
 ![memory](https://raw.githubusercontent.com/sematext/logsene-aws-lambda-cloudwatch/master/img/memory.png)
 
 To enable the function to run when new logs come in, you'd need to enable the source with your Flow Log name at the last step.

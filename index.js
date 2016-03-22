@@ -1,5 +1,4 @@
 var logseneToken = 'LOGSENE-APP-TOKEN-GOES-HERE'
-
 var zlib = require('zlib')
 var net = require('net')
 var client = null
@@ -7,7 +6,8 @@ var connected = false
 var start = 0
 var errorCounter = 0
 var Logagent = require('logagent-js')
-var lp = new Logagent('./pattern.yml')
+var lp = null
+ 
 function connectLogsene (cbf) {
   client = net.connect(12201, 'logsene-receiver-syslog.sematext.com', function () {
     connected = true
@@ -61,11 +61,13 @@ function parseLogs (err, data) {
       if(key!=='message')
         data[key] = this.event[key]
     }.bind(this))
+    //console.log('Now my data is ' + JSON.stringify(data))
     Object.keys(this.result).forEach(function (key) {
       if (key !== 'logEvents') {
         data['meta_' + key] = this.result[key]
       }
     }.bind(this))
+    //console.log('Now my data is ' + JSON.stringify(data))
     shipLogs(data, function checkDone () {
       //console.log('I\'m at ' + this.index + ' of ' + this.size)
       if (this.index === this.size - 1) {
@@ -104,14 +106,19 @@ function pushLogs (event, context) {
   })
   console.log(Date.now() - start)
 }
+
+
 function handler (event, context) {
   start = Date.now()
-  if (!connected) {
-    connectLogsene(function () {
+  lp = new Logagent('./pattern.yml', {}, function () {
+      if (!connected) {
+      connectLogsene(function () {
+        pushLogs(event, context)
+      })
+    } else {
       pushLogs(event, context)
-    })
-  } else {
-    pushLogs(event, context)
-  }
+    }
+  })
 }
 exports.handler = handler
+

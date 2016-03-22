@@ -1,9 +1,14 @@
 originalLine: true 
+geoIP: true
+maxmindDbDir: /tmp/
+
 
 patterns:
 - # AWS VPC: 2 043046862656 eni-ea966ad5 222.186.30.148 10.0.0.6 6000 3306 6 1 40 1457526416 1457526433 REJECT OK 
   sourceName: !!js/regexp /lambda/
   match:
     - type: lambda
-      regex: !!js/regexp (\d) (\d+) (.+?) (.+?) (.+?) (\d+) (\d+) (\d+) (\d+) (\d+) (\d+) (\d+) (.+?) (.+)
+      regex: !!js/regexp (\d) (\d+) (.+?) (.+?) (.+?) (\d+) (\d+) (\d+) (\d+) (\d+) (\d+) (\d+) (.+?) (.+?)
       fields: [version,account-id,interface-id,srcaddr,dstaddr,srcport,dstport,protocol,packets,bytes,start,end,action,log-status]
+      geoIP: srcaddr
+
