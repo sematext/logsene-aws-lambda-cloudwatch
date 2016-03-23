@@ -1,4 +1,4 @@
-
+![cloudwatch->Logsene](https://sematext.com/wp-content/uploads/2016/03/aws-cloudwatch.png)
 # logsene-aws-lambda-cloudwatch
 [AWS Lambda](https://aws.amazon.com/documentation/lambda/) function to send [CloudWatch](https://www.amazonaws.cn/en/cloudwatch/) logs, and has built-in parsing for [AWS VPC](https://aws.amazon.com/vpc/) logs. As new log events are being stored in CloudWatch, this function would forward the events to your Logsene application.
 
