@@ -3,7 +3,7 @@
 [AWS Lambda](https://aws.amazon.com/documentation/lambda/) function to send [CloudWatch](https://www.amazonaws.cn/en/cloudwatch/) logs to the [Logsene logging SaaS](https://sematext.com/logsene). As new log events are being stored in CloudWatch, this function would forward the events to your Logsene application.
 
 ## How To (VPC example)
-This tutorial shows how to send [AWS VPC](https://aws.amazon.com/vpc/) logs to a Logsene application. VPC logs are one type of CloudWatch logs, for which this function has built-in parsing. If you're using a type of CloudWatch logs that isn't support it, feel free to edit **pattern.yml** or to open an issue.
+This tutorial shows how to send [AWS VPC](https://aws.amazon.com/vpc/) logs to a Logsene application. VPC logs are one type of CloudWatch logs, for which this function has built-in parsing. If you're using a type of CloudWatch logs that isn't supported yet, feel free to edit **pattern.yml** or to open an issue.
 
 The main steps are:
  0. Create a Flow Log for your VPC, if there isn't one already. **If you're looking to ship other CloudWatch logs, just skip this step and go through the rest**.
