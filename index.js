@@ -20,7 +20,7 @@ function connectLogsene (context, cbf) {
     connected = false
     console.log(err)
     if (errorCounter < 10) {
-      var tid = setTimeout(function () { connectLogsene(cbf) }, 50)
+      var tid = setTimeout(function () { connectLogsene(context, cbf) }, 50)
       if (tid.unref) tid.unref()
     } else {
       context.fail(err)
