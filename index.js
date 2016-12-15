@@ -1,5 +1,5 @@
 'use strict'
-var logseneToken = 'LOGSENE-APP-TOKEN-GOES-HERE'
+var logseneToken = process.env.LOGSENE_TOKEN
 var zlib = require('zlib')
 var net = require('net')
 var client = null
