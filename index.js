@@ -9,6 +9,11 @@ var errorCounter = 0
 var Logagent = require('@sematext/logagent')
 var lp = null
 
+function debug () {
+  if (process.env.DEBUG) {
+    console.log.apply(null, arguments)
+  }
+}
 function connectLogsene (context, cbf) {
   client = net.connect(12201, 'logsene-receiver-syslog.sematext.com', function () {
     connected = true
@@ -56,7 +61,7 @@ process.on('SIGQUIT', disconnectLogsene)
 
 function shipLogs (logObj, cbf) {
   var json = JSON.stringify(logObj)
-  // console.log('send to logsene ' + json)
+  debug('send to logsene ' + json)
   client.write(json + '\n')
   if (cbf) {
     cbf(null, json)
@@ -77,8 +82,8 @@ function parseLogs (meta, err, data) {
         data['meta_' + key] = meta.result[key]
       }
     })
-    // console.log('Now my data is ' + JSON.stringify(data))
-    shipLogs(data, console.log)
+    // console.log('Now// my data is ' + JSON.stringify(data))
+    shipLogs(data, debug)
   } else {
     console.log('Ooops! Got this error: ' + err)
   }
@@ -91,7 +96,7 @@ function pushLogs (event, context) {
       context.fail(e)
     } else {
       result = JSON.parse(result.toString('utf8'))
-      console.log('Decoded payload: ', JSON.stringify(result))
+      debug('Decoded payload: ', JSON.stringify(result))
       for (let i = 0; i < result.logEvents.length; i++) {
         result.logEvents[i]['logsene-app-token'] = logseneToken
         let logMeta = { // binding parseLogs to this variables, accessible as this.context et. in parseLogs
@@ -108,7 +113,7 @@ function pushLogs (event, context) {
       errorCounter = 0
     }
   })
-  console.log(Date.now() - start)
+  debug('duration (ms):' + Date.now() - start)
 }
 
 function handler (event, context) {
