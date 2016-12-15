@@ -36,8 +36,7 @@ First you'd need to clone this repository:
 
     git@github.com:sematext/logsene-aws-lambda-s3.git
 
-Then, open **index.js** and fill in your Logsene application token in the **logseneToken** variable. To find the Logsene Application Token, go to your [Sematext Account](https://apps.sematext.com), then in the Services menu select Logsene, and then the Logsene application you want to send your logs to. Once you're in that application, click the Integration button and you'll see the application token:
-![token](https://raw.githubusercontent.com/sematext/logsene-aws-lambda-cloudwatch/master/img/token.png)
+Optionally: Edit pattern.yml (see [logagent parser](http://sematext.github.io/logagent-js/parser/#how-does-the-parser-work)) for additional parser rules, depending on the structure of your logs. Note: The "sourceName"" in the pattern definition should match the AWS "logGroup". 
 
 Now your code is ready, so you need to make a zip file out of it. **Note**: make sure you zip only the contents of the repository, not the directory containing the repository. The correct way to do it is something like this:
 
@@ -46,7 +45,11 @@ Now your code is ready, so you need to make a zip file out of it. **Note**: make
     zip -r logsene.zip *
 
 Finally, you'd upload the zip to AWS Lambda as the function code:
-![upload](https://raw.githubusercontent.com/sematext/logsene-aws-lambda-cloudwatch/master/img/upload.png)
+![upload](https://raw.githubusercontent.com/sematext/logsene-aws-lambda-cloudwatch/master/img/config_token_env_vars.png)
+
+Set the Logsene application token in  **LOGSENE_TOKEN** environment variable. To find the Logsene Application Token, go to your [Sematext Account](https://apps.sematext.com), then in the Services menu select Logsene, and then the Logsene application you want to send your logs to. Once you're in that application, click the Integration button and you'll see the application token:
+![token](https://raw.githubusercontent.com/sematext/logsene-aws-lambda-cloudwatch/master/img/token.png)
+
 
 ###Finalize the function configuration
 After the code, leave the handler to the default *index.handler* and select a role that allows this function to execute. You can create a new Basic execution role to do that (from the drop-down) or select a basic execution role that you've already created:
