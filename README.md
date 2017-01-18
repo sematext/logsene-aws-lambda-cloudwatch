@@ -34,7 +34,7 @@ Then you have to specify the code.
 ###Add the code to your Lambda function
 First you'd need to clone this repository:
 
-    git@github.com:sematext/logsene-aws-lambda-s3.git
+    git@github.com:sematext/logsene-aws-lambda-cloudwatch.git
 
 Optionally: Edit pattern.yml (see [logagent parser](http://sematext.github.io/logagent-js/parser/#how-does-the-parser-work)) for additional parser rules, depending on the structure of your logs. Note: The "sourceName"" in the pattern definition should match the AWS "logGroup". 
 
