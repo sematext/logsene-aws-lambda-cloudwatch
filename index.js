@@ -15,7 +15,7 @@ function debug () {
   }
 }
 function connectLogsene (context, cbf) {
-  client = net.connect(12201, 'logsene-receiver-syslog.sematext.com', function () {
+  client = net.connect(12201, 'logsene-syslog-receiver.sematext.com', function () {
     connected = true
     console.log('connected to Logsene')
     cbf()
