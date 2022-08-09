@@ -90,7 +90,7 @@ function parseLogs (meta, err, data) {
 }
 
 function pushLogs (event, context) {
-  var payload = new Buffer(event.awslogs.data, 'base64')
+  var payload = Buffer.from(event.awslogs.data, 'base64')
   zlib.gunzip(payload, function (e, result) {
     if (e) {
       context.fail(e)
