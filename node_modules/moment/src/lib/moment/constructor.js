@@ -1,14 +1,17 @@
 import { hooks } from '../utils/hooks';
-import hasOwnProp from '../utils/has-own-prop';
 import isUndefined from '../utils/is-undefined';
 import getParsingFlags from '../create/parsing-flags';
 
 // Plugins that add properties should also add the key here (null value),
 // so we can properly clone ourselves.
-var momentProperties = hooks.momentProperties = [];
+var momentProperties = (hooks.momentProperties = []),
+    updateInProgress = false;
 
 export function copyConfig(to, from) {
-    var i, prop, val;
+    var i,
+        prop,
+        val,
+        momentPropertiesLen = momentProperties.length;
 
     if (!isUndefined(from._isAMomentObject)) {
         to._isAMomentObject = from._isAMomentObject;
@@ -41,8 +44,8 @@ export function copyConfig(to, from) {
         to._locale = from._locale;
     }
 
-    if (momentProperties.length > 0) {
-        for (i in momentProperties) {
+    if (momentPropertiesLen > 0) {
+        for (i = 0; i < momentPropertiesLen; i++) {
             prop = momentProperties[i];
             val = from[prop];
             if (!isUndefined(val)) {
@@ -54,12 +57,13 @@ export function copyConfig(to, from) {
     return to;
 }
 
-var updateInProgress = false;
-
 // Moment prototype object
 export function Moment(config) {
     copyConfig(this, config);
     this._d = new Date(config._d != null ? config._d.getTime() : NaN);
+    if (!this.isValid()) {
+        this._d = new Date(NaN);
+    }
     // Prevent infinite loop in case updateOffset creates new moment
     // objects.
     if (updateInProgress === false) {
@@ -69,6 +73,8 @@ export function Moment(config) {
     }
 }
 
-export function isMoment (obj) {
-    return obj instanceof Moment || (obj != null && obj._isAMomentObject != null);
+export function isMoment(obj) {
+    return (
+        obj instanceof Moment || (obj != null && obj._isAMomentObject != null)
+    );
 }
